@@ -912,11 +912,11 @@ export function SuperAdminPanel() {
                                     View events
                                   </button>
                                   <button
-                                    onClick={() => Number(job.dry_run) === 1 ? approveAndRunJob(job.id) : setJobState(job.id, 'approve')}
+                                    onClick={() => setJobState(job.id, 'approve')}
                                     disabled={busyJobId === job.id || !['queued', 'rejected', 'failed'].includes(job.status)}
                                     className="w-full px-3 py-2 text-xs text-emerald-400 hover:bg-emerald-500/10 disabled:opacity-40"
                                   >
-                                    {Number(job.dry_run) === 1 ? 'Approve + Run' : 'Approve'}
+                                    Approve
                                   </button>
                                   <button
                                     onClick={() => setJobState(job.id, 'reject')}
