@@ -159,6 +159,14 @@ export async function POST(request: NextRequest) {
       finalConfig = { ...finalConfig, ...(gateway_config as Record<string, any>) };
     }
 
+    const maybePrimary = (finalConfig as any)?.model?.primary;
+    if (maybePrimary && typeof maybePrimary === 'object' && typeof maybePrimary.primary === 'string') {
+      (finalConfig as any).model = {
+        ...(finalConfig as any).model,
+        primary: maybePrimary.primary,
+      };
+    }
+
     if (!name || !finalRole) {
       return NextResponse.json({ error: 'Name and role are required' }, { status: 400 });
     }
